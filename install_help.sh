@@ -189,7 +189,8 @@ AutoHostname() {
           /bin/tr '[:upper:]' '[:lower:]' | \
           /bin/sed -e 's/^/ 0/g;s/:/-0/g; s/0\([0-9a-f][0-9a-f]\)/\1/g; s/ //g;'`
   [ -z $suffix ] && suffix=omnios
-  SetHostname $macadr-$suffix
+  [ "$suffix" == "-" ] && suffix= || suffix=-$suffix
+  SetHostname $macadr$suffix
 }
 
 SetTimezone()
